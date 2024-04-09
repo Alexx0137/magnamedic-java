@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form class="form"action="${pageContext.request.contextPath}/patients/form" method="POST">
+                    <form class="form" id="myForm" method="POST" onsubmit="setFormAction()">            
                         <c:if test="${!empty patient}">
                             <input type="hidden" name="id" value="${patient.id}">
                         </c:if>
@@ -104,12 +104,13 @@
                         </div>
                         <div class="form-row">
                             <div class="col-md-6">
-                                <button type="button" class="btn btn-secondary btn-sm mt-2 mx-1" onclick="cancelar()">
+                                <button type="button" class="btn btn-secondary btn-sm mt-2 mx-1" 
+                                        onclick="window.location.href = '${pageContext.request.contextPath}/patients/list'">
                                     <i class="fas fa-arrow-left"></i>
                                     Cancelar
                                 </button>
                                 <button type="submit" class="btn btn-primary btn-sm mt-2 mx-1">
-                                    Guardar
+                                    ${empty patient ? 'Guardar' : 'Actualizar'}
                                 </button>             
                             </div>
                         </div>

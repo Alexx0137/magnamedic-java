@@ -16,10 +16,10 @@ public class DeletePatientServlet extends HttpServlet {
             throws ServletException, IOException {
         try {
             int id = Integer.parseInt(request.getParameter("id"));
-            int rowsAffected = new PatientDAO().delete(id);
+            int rowsAffected = new PatientDAO().deletePatientById(id);
             
             if (rowsAffected > 0) {
-                response.sendRedirect(request.getContextPath() + "/patients");
+                response.sendRedirect(request.getContextPath() + "/patients/list");
             } else {
                 response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error al eliminar el paciente");
             }

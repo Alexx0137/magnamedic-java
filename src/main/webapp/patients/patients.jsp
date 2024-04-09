@@ -10,7 +10,9 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
               rel="stylesheet">
-        <link href="../css/styles.css" rel="stylesheet">
+        <link href="${pageContext.request.contextPath}/css/styles.css" rel="stylesheet">
+
+        <script src="${pageContext.request.contextPath}/js/scripts.js"></script>
     </head>
     <%@include file="../layouts/sidebar.jsp" %>
     <%@include file="../layouts/topbar.jsp" %>
@@ -61,12 +63,17 @@
                                         <td>${patient.telephone}</td>
                                         <td>${patient.createdAt}</td>
                                         <td>
-                                            <a href="${pageContext.request.contextPath}/patients/form/${patient.id}" class="btn btn-warning btn-sm" title="Editar">
+                                            <a href="${pageContext.request.contextPath}/patients/form/${patient.id}" 
+                                               class="btn btn-warning btn-sm" 
+                                               title="Editar">
                                                 <i class="fas fa-edit fa-lg fa-lg"></i>
                                             </a>
-                                            <a href="#" class="btn btn-danger btn-sm" title="Eliminar">
-                                                <i class="fas fa-trash fa-lg fa-lg"></i>
-                                            </a>
+                                            <form action="${pageContext.request.contextPath}/patients/delete" method="post" id="deleteForm">
+                                                <input type="hidden" name="id" value="${patient.id}">
+                                                <button type="button" class="btn btn-danger btn-sm" title="Eliminar" onclick="confirmDelete()">
+                                                    <i class="fas fa-trash fa-lg"></i>
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -80,15 +87,4 @@
 
     <%@include file="../layouts/footer.jsp" %>
 
-    <!-- Agregar el script JavaScript aquí -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $.getJSON('${pageContext.request.contextPath}/patients/list', function (data) {
-                // Procesar la respuesta JSON y mostrarla en la página
-                // Por ejemplo, podrías construir una tabla HTML con los datos de los pacientes
-                // y luego agregarla al DOM
-            });
-        });
-    </script>
 </html>

@@ -15,7 +15,7 @@ public class ReadPatientServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Patient> patients = new PatientDAO().fetch();
+        List<Patient> patients = new PatientDAO().getAllPatients();
         request.setAttribute("patients", patients);
         request.getRequestDispatcher("/patients/patients.jsp").forward(request, response);
     }

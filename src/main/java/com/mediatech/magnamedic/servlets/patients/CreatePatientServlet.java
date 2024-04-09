@@ -44,7 +44,7 @@ public class CreatePatientServlet extends HttpServlet {
             int  bloodTypeId = Integer.parseInt(request.getParameter("bloodTypeId"));          
 
             Patient patient = new Patient(0, identification, identificationTypeId, name, lastName, genderId, dateOfBirth, address, city, telephone, email, bloodTypeId, null);
-            int rowsAffected = new PatientDAO().create(patient);
+            int rowsAffected = new PatientDAO().insertPatient(patient);
 
             if (rowsAffected > 0) {
                 response.sendRedirect(request.getContextPath() + "/patients/list");
